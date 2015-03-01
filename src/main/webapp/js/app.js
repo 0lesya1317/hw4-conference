@@ -86,11 +86,12 @@ app.constant('HTTP_ERRORS', {
  */
 app.factory('oauth2Provider', function ($modal) {
     var oauth2Provider = {
-        CLIENT_ID: 'replace with your client id',
+        CLIENT_ID: '16145644494-ugutkff5bnffm9esqcrf0bqutn8bkhhk.apps.googleusercontent.com',
         SCOPES: 'https://www.googleapis.com/auth/userinfo.email profile',
         signedIn: false
     };
 
+    
     /**
      * Calls the OAuth2 authentication method.
      */
