@@ -211,4 +211,22 @@ public class ConferenceApi {
         return query.list();
     }
     
+    
+    @ApiMethod(
+    		name = "getConferencesCreated",
+    		path = "getConferencesCreated",
+    		httpMethod = HttpMethod.POST
+    )
+    public List<Conference> getConferencesCreated(final User user) throws UnauthorizedException {
+    // If not signed in, throw a 401 error.
+    if (user == null) {
+    	throw new UnauthorizedException("Authorization required");
+    }
+    String userId = user.getUserId();
+    Key<Profile> userKey = Key.create(Profile.class, userId);
+    return ofy().load().type(Conference.class)
+    .ancestor(userKey)
+    .order("name").list();
+    }
+    
 }
