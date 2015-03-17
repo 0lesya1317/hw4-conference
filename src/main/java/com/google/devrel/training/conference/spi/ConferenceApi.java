@@ -3,6 +3,8 @@ package com.google.devrel.training.conference.spi;
 import static com.google.devrel.training.conference.service.OfyService.factory;
 import static com.google.devrel.training.conference.service.OfyService.ofy;
 
+import java.util.List;
+
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -15,6 +17,7 @@ import com.google.devrel.training.conference.form.ConferenceForm;
 import com.google.devrel.training.conference.form.ProfileForm;
 import com.google.devrel.training.conference.form.ProfileForm.TeeShirtSize;
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.cmd.Query;
 
 /**
  * Defines conference APIs.
@@ -196,4 +199,16 @@ public class ConferenceApi {
 
          return conference;
          }
+    
+    
+    @ApiMethod(
+            name = "queryConferences",
+            path = "queryConferences",
+            httpMethod = HttpMethod.POST
+    )
+    public List<Conference> queryConferences() {
+        Query<Conference> query = ofy().load().type(Conference.class).order("name");
+        return query.list();
+    }
+    
 }
